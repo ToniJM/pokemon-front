@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-between align-items-center pb-2">
+  <h1 class="pt-2">Your Pokemons</h1><a routerLink="/pokemon" class="btn btn-primary">New Pokemon</a>
+</div>
+
+<agm-map [zoom]="17" [latitude]="lat" [longitude]="lng" style="height: 500px;">
+  <agm-marker *ngFor="let pokemon of pokemons"
+      label="P"
+      [latitude]="pokemon.lat"
+      [longitude]="pokemon.lng">
+    <agm-info-window>
+      <div class="d-flex">
+        <div class="w-50 d-inline-block">
+          <h4>{{pokemon.nickname}}</h4>
+          <h6>{{pokemon.pokemon}}</h6>
+          <button class="btn btn-secondary" (click)="del(pokemon)">Delete</button>
+        </div>
+        <div class="w-50 d-inline-block">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon.pokemonId}}.png" alt="">
+        </div>
+      </div>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>

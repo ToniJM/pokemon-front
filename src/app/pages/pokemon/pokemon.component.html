@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-between align-items-center pb-2">
+  <h1 class="pt-2">New Pokemon</h1><a routerLink="/home" class="btn btn-danger">Back</a>
+</div>
+
+<agm-map [zoom]="15" [latitude]="mapLat" [longitude]="mapLng" style="height: 300px;">
+  <agm-marker label="P" [latitude]="pokemonLat" [longitude]="pokemonLng">
+    <agm-info-window>Sarasa</agm-info-window>
+  </agm-marker>
+</agm-map>
+
+<div class="row mt-2">
+  <div class="col-md-8 offset-md-2">
+    <form (ngSubmit)="store(form)" #form="ngForm">
+      <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">Nickname</label>
+        <div class="col-sm-10">
+          <input type="text"
+                  class="form-control"
+                  [(ngModel)]="pokemon.nickname"
+                  name="nickname"
+                  id="nickname"
+                  placeholder="Nickname"
+                  required>
+          <div class="text-danger" [hidden]="!error.nickname">
+            {{error.nickname}}
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="pokemonId" class="col-sm-2 col-form-label">Pokemon</label>
+        <div class="col-sm-10">
+          <ng-select2
+            [(ngModel)]="pokemon.pokemonId"
+            name="pokemonId"
+            [data]="pokemonList"
+            width="100%"
+            [placeholder]="'Please select a fruit...'">
+          </ng-select2>
+          <div class="text-danger" [hidden]="!error.pokemonId">
+            {{error.pokemonId}}
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary w-25">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
